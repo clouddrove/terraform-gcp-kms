@@ -1,8 +1,9 @@
 name: 'Terratest GitHub Actions'
 on:
-  push:
+  pull_request:
     branches:
-      - main
+      - master
+    types: [labeled]
 
 jobs:
   DNS:

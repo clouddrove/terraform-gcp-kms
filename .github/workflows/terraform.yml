@@ -1,9 +1,8 @@
 name: static-checks
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+
 jobs:
   versionExtract:
     name: Get min/max versions

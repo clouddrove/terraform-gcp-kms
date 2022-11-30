@@ -30,7 +30,7 @@ badges:
 
 #  description of this project
 description: |-
-  Terraform module to create subnet resource on google.
+  This terraform module creates a KMS Customer Master Key (CMK).
 # extra content
 include:
   - "terraform.md"
