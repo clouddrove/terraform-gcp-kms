@@ -1,0 +1,63 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name : Terraform gcp kms
+
+# License of this project
+license: "APACHE"
+
+# Canonical GitHub repo
+github_repo: clouddrove/terraform-gcp-kms
+
+# Badges to display
+badges:
+  - name: "Terraform"
+    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
+    url: "https://www.terraform.io"
+  - name: "Licence"
+    image: "https://img.shields.io/badge/License-APACHE-blue.svg"
+    url: "LICENSE.md"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml"
+  - name: "static-checks"
+    image: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/terraform.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/terraform.yml"
+
+#  description of this project
+description: |-
+  Terraform module to create subnet resource on google.
+# extra content
+include:
+  - "terraform.md"
+
+# How to use this project
+# How to use this project
+usage: |-
+  Here are some examples of how you can use this module in your inventory structure:
+  ### Default subnet
+  ```hcl
+  module "kms_key" {
+
+  source = "clouddrove/kms/google"
+  version     = "1.0.0"
+
+  name        = "prod"
+  environment = var.environment
+  label_order = var.label_order
+
+  google_kms_key_ring_enabled               = true
+  google_kms_crypto_key_enabled             = true
+  google_kms_crypto_key_iam_binding_enabled = true
+  project_id                                = var.gcp_project_id
+  location                                  = var.location
+  keys                                      = ["dev"]
+  prevent_destroy                           = false
+  service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
+  role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  }
+  ```

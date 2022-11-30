@@ -1,5 +1,6 @@
 module "labels" {
-  source = "git::https://github.com/clouddrove/terraform-gcp-labels.git?ref"
+  source      = "clouddrove/labels/gcp"
+  version     = "1.0.0"
 
   name        = var.name
   environment = var.environment
