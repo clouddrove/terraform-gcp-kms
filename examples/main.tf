@@ -19,7 +19,6 @@ module "kms_key" {
   project_id                                = var.gcp_project_id
   location                                  = var.location
   keys                                      = ["cloud_kms-key"]
-  prevent_destroy                           = true
   service_accounts                          = ["serviceAccount:general-use@dev-env-3b53.iam.gserviceaccount.com"]
   role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
 }
