@@ -1,6 +1,6 @@
 variable "environment" {
   type        = string
-  default     = "key"
+  default     = ""
   description = "Environment name"
 }
 
@@ -12,24 +12,24 @@ variable "label_order" {
 
 variable "gcp_project_id" {
   type        = string
-  default     = "clouddrove"
+  default     = "dev-env-3b53"
   description = "Google Cloud project ID"
 }
 
 variable "gcp_region" {
   type        = string
-  default     = "europe-west1"
+  default     = "us-east1"
   description = "Google Cloud region"
 }
 
 variable "gcp_zone" {
   type        = string
-  default     = "Europe-west3-c"
+  default     = "us-east1-c"
   description = "Google Cloud zone"
 }
 
 variable "location" {
   type        = string
-  default     = "europe-west3"
+  default     = "us-east1"
   description = "Location for the keyring."
 }

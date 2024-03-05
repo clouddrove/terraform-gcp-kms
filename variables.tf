@@ -37,7 +37,7 @@ variable "keyring" {
 
 variable "keys" {
   type        = list(string)
-  default     = []
+  default     = ["KMS-KEY"]
   description = "Key names."
 }
 
@@ -77,6 +77,13 @@ variable "google_kms_crypto_key_enabled" {
   description = "(Optional) Whether or not to create resources within the module."
 }
 
+variable "google_kms_crypto_key_ephemeral_enabled" {
+  type        = bool
+  default     = true
+  description = "(Optional) Whether or not to create resources within the module."
+}
+
+
 variable "google_kms_crypto_key_iam_binding_enabled" {
   type        = bool
   default     = true
@@ -105,3 +112,6 @@ variable "key_rotation_period" {
   type    = string
   default = "100000s"
 }
+
+
+

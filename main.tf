@@ -1,6 +1,6 @@
 module "labels" {
-  source      = "clouddrove/labels/gcp"
-  version     = "1.0.0"
+  source  = "clouddrove/labels/gcp"
+  version = "1.0.0"
 
   name        = var.name
   environment = var.environment
@@ -24,7 +24,7 @@ resource "google_kms_crypto_key" "key" {
   purpose         = var.purpose
 
   lifecycle {
-    prevent_destroy = false
+    prevent_destroy = true
   }
 
   version_template {
@@ -35,7 +35,7 @@ resource "google_kms_crypto_key" "key" {
 }
 
 resource "google_kms_crypto_key" "key_ephemeral" {
-  count = var.google_kms_crypto_key_enabled && var.module_enabled ? 1 : 0
+  count = var.google_kms_crypto_key_ephemeral_enabled && var.module_enabled ? 1 : 0
 
   name            = module.labels.id
   key_ring        = join("", google_kms_key_ring.key_ring.*.id)
