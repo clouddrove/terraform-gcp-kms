@@ -41,12 +41,6 @@ variable "keys" {
   description = "Key names."
 }
 
-variable "prevent_destroy" {
-  type        = bool
-  default     = true
-  description = "Set the prevent_destroy lifecycle attribute on keys."
-}
-
 variable "purpose" {
   type        = string
   default     = "ENCRYPT_DECRYPT"
@@ -68,26 +62,25 @@ variable "module_enabled" {
 variable "google_kms_key_ring_enabled" {
   type        = bool
   default     = true
-  description = "(Optional) Whether or not to create resources within the module."
+  description = "(Optional) Whether or not to create a Google Cloud KMS key ring within the module. Set to true to include the key ring, false to exclude it."
 }
 
 variable "google_kms_crypto_key_enabled" {
   type        = bool
   default     = true
-  description = "(Optional) Whether or not to create resources within the module."
+  description = "(Optional) Whether or not to create a Google Cloud KMS crypto key within the module. Set to true to include the crypto key, false to exclude it."
 }
 
 variable "google_kms_crypto_key_ephemeral_enabled" {
   type        = bool
   default     = true
-  description = "(Optional) Whether or not to create resources within the module."
+  description = "(Optional) Whether or not to create an ephemeral Google Cloud KMS crypto key within the module. Set to true to include the ephemeral crypto key, false to exclude it."
 }
-
 
 variable "google_kms_crypto_key_iam_binding_enabled" {
   type        = bool
   default     = true
-  description = "(Optional) Whether or not to create resources within the module."
+  description = "(Optional) Whether or not to create IAM bindings for the Google Cloud KMS crypto key within the module. Set to true to include IAM bindings, false to exclude them."
 }
 
 variable "service_accounts" {
