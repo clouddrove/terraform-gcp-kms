@@ -4,6 +4,10 @@ provider "google" {
   zone    = var.gcp_zone
 }
 
+##----------------------------------------------------------------------------- 
+## KMS key module call.   
+##-----------------------------------------------------------------------------
+
 module "kms_key" {
 
   source = "../"
@@ -19,6 +23,6 @@ module "kms_key" {
   project_id                                = var.gcp_project_id
   location                                  = var.location
   keys                                      = ["cloud_kms-key"]
-  service_accounts                          = ["serviceAccount:general-use@dev-env-3b53.iam.gserviceaccount.com"]
+  service_accounts                          = ["serviceAccount:example@project-id.iam.gserviceaccount.com"]
   role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
 }
