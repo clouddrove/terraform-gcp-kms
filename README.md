@@ -64,6 +64,10 @@ This module has a few dependencies:
 
 
 
+
+
+
+
 ## Examples
 
 
@@ -71,26 +75,29 @@ This module has a few dependencies:
 
 
 Here are some examples of how you can use this module in your inventory structure:
-### Default subnet
+### Default KMS
 ```hcl
 module "kms_key" {
 
-source = "clouddrove/kms/google"
-version     = "1.0.0"
+  source = "../../"
 
-environment = var.environment
-label_order = var.label_order
+  environment = "dev"
+  label_order = ["environment", "name"]
 
-prevent_destroy                           = false      # when prevent_destroy is true (long-lived key) # when prevent_destroy is false (short-lived key)
-google_kms_crypto_key_iam_binding_enabled = true
-project_id                                = var.gcp_project_id
-location                                  = var.location
-keyring                                   = "test-keyring"
-keys                                      = ["KMS1", "KMS2"]  #for multiple keys
-service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
-role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  google_kms_crypto_key_iam_binding_enabled = true
+  project_id                                = "clouddrove"
+  prevent_destroy                           = false
+  keyring                                   = "test-keyring"
+  location                                  = "us-east1"
+  keys                                      = ["KMS1"]
+  service_accounts                          = ["serviceAccount:example@project-id.iam.gserviceaccount.com"]
+  role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
 }
 ```
+
+
+
+
 
 
 ## Inputs
@@ -98,7 +105,6 @@ role                                      = "roles/cloudkms.cryptoKeyEncrypterDe
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | environment | Environment name | `string` | `"dev"` | no |
-| google\_kms\_crypto\_key\_iam\_binding\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
 | key\_algorithm | The algorithm to use when creating a version based on this template. See the https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm for possible inputs. | `string` | `"GOOGLE_SYMMETRIC_ENCRYPTION"` | no |
 | key\_protection\_level | The protection level to use when creating a version based on this template. Default value: "SOFTWARE" Possible values: ["SOFTWARE", "HSM"] | `string` | `"SOFTWARE"` | no |
 | key\_rotation\_period | n/a | `string` | `"100000s"` | no |
