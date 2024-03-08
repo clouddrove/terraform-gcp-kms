@@ -6,32 +6,32 @@ module "labels" {
   source  = "clouddrove/labels/gcp"
   version = "1.0.0"
 
-  name        = var.name
   environment = var.environment
   label_order = var.label_order
 }
 
+locals {
+  keys_by_name = zipmap(var.keys, var.prevent_destroy ? slice(google_kms_crypto_key.key[*].id, 0, length(var.keys)) : slice(google_kms_crypto_key.key_ephemeral[*].id, 0, length(var.keys)))
+}
+
 ##----------------------------------------------------------------------------- 
-## resource uses to create key_ring
+## resource uses for create key-ring
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_key_ring" "key_ring" {
-  count = var.google_kms_key_ring_enabled && var.module_enabled ? 1 : 0
-
-  name     = module.labels.id
+  name     = var.keyring
   project  = var.project_id
   location = var.location
 }
 
 ##----------------------------------------------------------------------------- 
-## crypto key (long-lived key)
+## prevent_destroy = true for long lived key not deleting using terraform 
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_crypto_key" "key" {
-  count = var.google_kms_crypto_key_enabled && var.module_enabled ? 1 : 0
-
-  name            = module.labels.id
-  key_ring        = join("", google_kms_key_ring.key_ring[*].id)
+  count           = var.prevent_destroy ? length(var.keys) : 0
+  name            = var.keys[count.index]
+  key_ring        = google_kms_key_ring.key_ring.id
   rotation_period = var.key_rotation_period
   purpose         = var.purpose
 
@@ -47,14 +47,13 @@ resource "google_kms_crypto_key" "key" {
 }
 
 ##----------------------------------------------------------------------------- 
-## crypto key (short-lived key)
+## prevent_destroy = false for short lived key deleting using terraform 
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_crypto_key" "key_ephemeral" {
-  count = var.google_kms_crypto_key_ephemeral_enabled && var.module_enabled ? 1 : 0
-
-  name            = module.labels.id
-  key_ring        = join("", google_kms_key_ring.key_ring[*].id)
+  count           = var.prevent_destroy ? 0 : length(var.keys)
+  name            = var.keys[count.index]
+  key_ring        = google_kms_key_ring.key_ring.id
   rotation_period = var.key_rotation_period
   purpose         = var.purpose
 
@@ -66,7 +65,6 @@ resource "google_kms_crypto_key" "key_ephemeral" {
     algorithm        = var.key_algorithm
     protection_level = var.key_protection_level
   }
-
 }
 
 ##----------------------------------------------------------------------------- 

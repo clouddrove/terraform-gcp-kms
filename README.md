@@ -78,17 +78,15 @@ module "kms_key" {
 source = "clouddrove/kms/google"
 version     = "1.0.0"
 
-name        = "prod"
 environment = var.environment
 label_order = var.label_order
 
-google_kms_key_ring_enabled               = true
-google_kms_crypto_key_enabled             = true    # when prevent_destroy required true use this key (long-lived key)
-google_kms_crypto_key_ephemeral_enabled   = false   # when prevent_destroy required false use this key (short-lived key)
+prevent_destroy                           = false      # when prevent_destroy is true (long-lived key) # when prevent_destroy is false (short-lived key)
 google_kms_crypto_key_iam_binding_enabled = true
 project_id                                = var.gcp_project_id
 location                                  = var.location
-keys                                      = ["dev"]
+keyring                                   = "test-keyring"
+keys                                      = ["KMS1", "KMS2"]  #for multiple keys
 service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
 role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 }
@@ -100,10 +98,7 @@ role                                      = "roles/cloudkms.cryptoKeyEncrypterDe
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | environment | Environment name | `string` | `"dev"` | no |
-| google\_kms\_crypto\_key\_enabled | create an ephemeral Google Cloud KMS crypto key within the module. Set to true to include it. | `bool` | `true` | no |
-| google\_kms\_crypto\_key\_ephemeral\_enabled | create an ephemeral Google Cloud KMS crypto key within the module. Set to false to exclude it." | `bool` | `true` | no |
 | google\_kms\_crypto\_key\_iam\_binding\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
-| google\_kms\_key\_ring\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
 | key\_algorithm | The algorithm to use when creating a version based on this template. See the https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm for possible inputs. | `string` | `"GOOGLE_SYMMETRIC_ENCRYPTION"` | no |
 | key\_protection\_level | The protection level to use when creating a version based on this template. Default value: "SOFTWARE" Possible values: ["SOFTWARE", "HSM"] | `string` | `"SOFTWARE"` | no |
 | key\_rotation\_period | n/a | `string` | `"100000s"` | no |
