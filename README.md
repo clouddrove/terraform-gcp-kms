@@ -70,54 +70,10 @@ This module has a few dependencies:
 **IMPORTANT:** Since the `master` branch used in `source` varies based on new modifications, we suggest that you use the release versions [here](https://github.com/clouddrove/terraform-gcp-kms/releases).
 
 
-Here are some examples of how you can use this module in your inventory structure:
-### Default subnet
-```hcl
-module "kms_key" {
-
-source = "clouddrove/kms/google"
-version     = "1.0.0"
-
-name        = "prod"
-environment = var.environment
-label_order = var.label_order
-
-google_kms_key_ring_enabled               = true
-google_kms_crypto_key_enabled             = true    # when prevent_destroy required true use this key (long-lived key)
-google_kms_crypto_key_ephemeral_enabled   = false   # when prevent_destroy required false use this key (short-lived key)
-google_kms_crypto_key_iam_binding_enabled = true
-project_id                                = var.gcp_project_id
-location                                  = var.location
-keys                                      = ["dev"]
-service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
-role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-}
-```
 
 
-## Inputs
 
-| Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
-| environment | Environment name | `string` | `"dev"` | no |
-| google\_kms\_crypto\_key\_enabled | create an ephemeral Google Cloud KMS crypto key within the module. Set to true to include it. | `bool` | `true` | no |
-| google\_kms\_crypto\_key\_ephemeral\_enabled | create an ephemeral Google Cloud KMS crypto key within the module. Set to false to exclude it." | `bool` | `true` | no |
-| google\_kms\_crypto\_key\_iam\_binding\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
-| google\_kms\_key\_ring\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
-| key\_algorithm | The algorithm to use when creating a version based on this template. See the https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm for possible inputs. | `string` | `"GOOGLE_SYMMETRIC_ENCRYPTION"` | no |
-| key\_protection\_level | The protection level to use when creating a version based on this template. Default value: "SOFTWARE" Possible values: ["SOFTWARE", "HSM"] | `string` | `"SOFTWARE"` | no |
-| key\_rotation\_period | n/a | `string` | `"100000s"` | no |
-| keyring | Keyring name. | `string` | `""` | no |
-| keys | Key names. | `list(string)` | `[]` | no |
-| label\_order | Label order, e.g. `name`,`application`. | `list(any)` | <pre>[<br>  "name",<br>  "environment"<br>]</pre> | no |
-| location | Location for the keyring. | `string` | `""` | no |
-| module\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
-| name | (Optional) The name of the VPC. The name will be used to prefix all associacted resources also. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression "[a-z]([-a-z0-9]\*[a-z0-9])?" which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. Default is "main". | `string` | `""` | no |
-| prevent\_destroy | Set the prevent\_destroy lifecycle attribute on keys. | `bool` | `true` | no |
-| project\_id | (Optional) The ID of the project in which the resource belongs. If it is not set, the provider project is used. | `string` | `null` | no |
-| purpose | The immutable purpose of the CryptoKey. Possible values are ENCRYPT\_DECRYPT, ASYMMETRIC\_SIGN, and ASYMMETRIC\_DECRYPT. | `string` | `"ENCRYPT_DECRYPT"` | no |
-| role | this role use for permissions | `string` | `"roles/cloudkms.cryptoKeyEncrypterDecrypter"` | no |
-| service\_accounts | List of comma-separated owners for each key declared in set\_owners\_for. | `list(string)` | `[]` | no |
+
 
 ## Outputs
 
