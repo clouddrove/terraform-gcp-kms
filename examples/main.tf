@@ -22,7 +22,6 @@ module "kms_key" {
   google_kms_crypto_key_iam_binding_enabled = true
   project_id                                = var.gcp_project_id
   location                                  = var.location
-  keys                                      = ["cloud_kms-key"]
   service_accounts                          = ["serviceAccount:example@project-id.iam.gserviceaccount.com"]
   role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
 }
