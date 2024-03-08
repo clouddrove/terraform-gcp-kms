@@ -33,9 +33,3 @@ variable "location" {
   default     = "us-east1"
   description = "Location for the keyring."
 }
-
-variable "keys" {
-  description = "Key names."
-  type        = list(string)
-  default     = []
-}
