@@ -1,6 +1,6 @@
 variable "environment" {
   type        = string
-  default     = ""
+  default     = "dev"
   description = "Environment name"
 }
 
@@ -32,10 +32,4 @@ variable "location" {
   type        = string
   default     = "us-east1"
   description = "Location for the keyring."
-}
-
-variable "keys" {
-  description = "Key names."
-  type        = list(string)
-  default     = []
 }

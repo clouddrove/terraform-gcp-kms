@@ -7,7 +7,7 @@ module "kms_key" {
 
   source = "../../"
 
-  environment = "dev"
+  environment = var.environment
   label_order = var.label_order
 
   google_kms_crypto_key_iam_binding_enabled = true
