@@ -12,7 +12,7 @@ variable "label_order" {
 
 variable "gcp_project_id" {
   type        = string
-  default     = "icardio-dev-project"
+  default     = "clouddrove"
   description = "Google Cloud project ID"
 }
 
@@ -33,3 +33,4 @@ variable "location" {
   default     = "us-east1"
   description = "Location for the keyring."
 }
+
