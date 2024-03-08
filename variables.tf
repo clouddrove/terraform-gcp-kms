@@ -31,18 +31,6 @@ variable "location" {
   description = "Location for the keyring."
 }
 
-variable "keyring" {
-  type        = string
-  default     = ""
-  description = "Keyring name."
-}
-
-variable "keys" {
-  type        = list(string)
-  default     = ["KMS-KEY"]
-  description = "Key names."
-}
-
 variable "purpose" {
   type        = string
   default     = "ENCRYPT_DECRYPT"
