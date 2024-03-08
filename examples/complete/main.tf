@@ -5,19 +5,18 @@
 
 module "kms_key" {
 
-  source = "../"
+  source = "../../"
 
-  name        = "kms-test1"
-  environment = var.environment
+  environment = "dev"
   label_order = var.label_order
 
-  google_kms_key_ring_enabled               = true
-  google_kms_crypto_key_enabled             = true
-  google_kms_crypto_key_ephemeral_enabled   = false
   google_kms_crypto_key_iam_binding_enabled = true
   project_id                                = var.gcp_project_id
+  prevent_destroy                           = true
+  key_rotation_period                       = "100000s"
+  keyring                                   = "test-keyring"
   location                                  = var.location
-  # keys                                      = ["cloud_kms-key"]
+  keys                                      = ["KMS1", "KMS2"]
   service_accounts                          = ["serviceAccount:example@project-id.iam.gserviceaccount.com"]
   role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
 }

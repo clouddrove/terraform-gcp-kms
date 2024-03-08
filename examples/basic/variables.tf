@@ -12,7 +12,7 @@ variable "label_order" {
 
 variable "gcp_project_id" {
   type        = string
-  default     = "clouddrove"
+  default     = "cloud-crew-404516"
   description = "Google Cloud project ID"
 }
 
@@ -34,3 +34,8 @@ variable "location" {
   description = "Location for the keyring."
 }
 
+variable "keys" {
+  description = "Key names."
+  type        = list(string)
+  default     = []
+}
