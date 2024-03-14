@@ -39,23 +39,22 @@ include:
 # How to use this project
 usage: |-
   Here are some examples of how you can use this module in your inventory structure:
-### Default 
-```hcl
-module "kms_key" {
+  ### Default KMS
+  ```hcl
+  module "kms_key" {
 
-  source = "clouddrove/kms/google"
-  version     = "1.0.0"
+    source = "clouddrove/kms/google"
+    version     = "1.0.0"
 
-  environment = var.environment
-  label_order = var.label_order
+    environment = var.environment
+    label_order = var.label_order
 
-  prevent_destroy                           = false      # when prevent_destroy is true (long-lived key) # when prevent_destroy is false (short-lived key)
-  google_kms_crypto_key_iam_binding_enabled = true
-  project_id                                = var.gcp_project_id
-  location                                  = var.location
-  keys                                      = ["dev"]    # add key names in list
-  service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
-  role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
-}
-```
-
+    prevent_destroy                           = false      # when prevent_destroy is true (long-lived key) # when prevent_destroy is false (short-lived key)
+    google_kms_crypto_key_iam_binding_enabled = true
+    project_id                                = var.gcp_project_id
+    location                                  = var.location
+    keys                                      = ["dev"]    # add key names in list
+    service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
+    role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
+  }
+  ```
