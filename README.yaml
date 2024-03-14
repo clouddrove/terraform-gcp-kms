@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name : Terraform gcp subnet
+name : Terraform gcp KMS
 
 # License of this project
 license: "APACHE"
