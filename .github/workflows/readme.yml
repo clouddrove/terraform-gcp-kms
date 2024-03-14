@@ -3,9 +3,8 @@ on:
   push:
     branches:
       - master
-
 jobs:
-  readme-create:
+  readme:
     name: 'readme-create'
     runs-on: ubuntu-latest
     steps:
@@ -25,11 +24,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
       - name: 'pre-commit check errors'
         uses: pre-commit/action@v3.0.1
         continue-on-error: true
 
-      - name: 'pre-commit fix erros'
+      - name: 'pre-commit fix errors'
         uses: pre-commit/action@v3.0.1
         continue-on-error: true
 
@@ -40,7 +40,7 @@ jobs:
           actions_subcommand: 'push'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          
       # - name: 'Slack Notification'
       #   uses: clouddrove/action-slack@v2
       #   with:
