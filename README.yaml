@@ -41,7 +41,7 @@ usage: |-
   Here are some examples of how you can use this module in your inventory structure:
 ### Default 
 ```hcl
-  module "kms_key" {
+module "kms_key" {
 
   source = "clouddrove/kms/google"
   version     = "1.0.0"
