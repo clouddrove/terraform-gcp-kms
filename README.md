@@ -4,11 +4,11 @@
 
 
 <h1 align="center">
-    Terraform gcp kms
+    Terraform gcp subnet
 </h1>
 
 <p align="center" style="font-size: 1.2rem;"> 
-    This terraform module creates a KMS Customer Master Key (CMK).
+    Terraform module to create KMS resource on google.
      </p>
 
 <p align="center">
@@ -19,11 +19,11 @@
 <a href="LICENSE.md">
   <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
 </a>
-<a href="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml">
-  <img src="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml/badge.svg" alt="tfsec">
+<a href="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml">
+  <img src="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml/badge.svg" alt="tfsec">
 </a>
-<a href="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/terraform.yml">
-  <img src="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/terraform.yml/badge.svg" alt="static-checks">
+<a href="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml">
+  <img src="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml/badge.svg" alt="static-checks">
 </a>
 
 
@@ -33,10 +33,10 @@
 <a href='https://facebook.com/sharer/sharer.php?u=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on Facebook" src="https://user-images.githubusercontent.com/50652676/62817743-4f64cb80-bb59-11e9-90c7-b057252ded50.png" />
 </a>
-<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+gcp+kms&url=https://github.com/clouddrove/terraform-gcp-kms'>
+<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+gcp+subnet&url=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on LinkedIn" src="https://user-images.githubusercontent.com/50652676/62817742-4e339e80-bb59-11e9-87b9-a1f68cae1049.png" />
 </a>
-<a href='https://twitter.com/intent/tweet/?text=Terraform+gcp+kms&url=https://github.com/clouddrove/terraform-gcp-kms'>
+<a href='https://twitter.com/intent/tweet/?text=Terraform+gcp+subnet&url=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on Twitter" src="https://user-images.githubusercontent.com/50652676/62817740-4c69db00-bb59-11e9-8a79-3580fbbf6d5c.png" />
 </a>
 
@@ -57,12 +57,6 @@ We have [*fifty plus terraform modules*][terraform_modules]. A few of them are c
 
 This module has a few dependencies: 
 
-- [Terraform 1.x.x](https://learn.hashicorp.com/terraform/getting-started/install.html)
-- [Go](https://golang.org/doc/install)
-- [github.com/stretchr/testify/assert](https://github.com/stretchr/testify)
-- [github.com/gruntwork-io/terratest/modules/terraform](https://github.com/gruntwork-io/terratest)
-
-
 
 
 
@@ -79,19 +73,19 @@ Here are some examples of how you can use this module in your inventory structur
 ```hcl
 module "kms_key" {
 
-  source = "../../"
+  source = "clouddrove/kms/google"
+  version     = "1.0.0"
 
-  environment = "dev"
-  label_order = ["environment", "name"]
+  environment = var.environment
+  label_order = var.label_order
 
+  prevent_destroy                           = false      # when prevent_destroy is true (long-lived key) # when prevent_destroy is false (short-lived key)
   google_kms_crypto_key_iam_binding_enabled = true
-  project_id                                = "clouddrove"
-  prevent_destroy                           = false
-  keyring                                   = "test-keyring"
-  location                                  = "us-east1"
-  keys                                      = ["KMS1"]
-  service_accounts                          = ["serviceAccount:example@project-id.iam.gserviceaccount.com"]
-  role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter" # add required roles here
+  project_id                                = var.gcp_project_id
+  location                                  = var.location
+  keys                                      = ["dev"]    # add key names in list
+  service_accounts                          = ["serviceAccount:service-xxxxxxxxxxxxxxx.gserviceaccount.com"]
+  role                                      = "roles/cloudkms.cryptoKeyEncrypterDecrypter"
 }
 ```
 
@@ -105,15 +99,15 @@ module "kms_key" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | environment | Environment name | `string` | `"dev"` | no |
+| google\_kms\_crypto\_key\_iam\_binding\_enabled | (Optional) Whether or not to create IAM bindings for the Google Cloud KMS crypto key within the module. Set to true to include IAM bindings, false to exclude them. | `bool` | `true` | no |
 | key\_algorithm | The algorithm to use when creating a version based on this template. See the https://cloud.google.com/kms/docs/reference/rest/v1/CryptoKeyVersionAlgorithm for possible inputs. | `string` | `"GOOGLE_SYMMETRIC_ENCRYPTION"` | no |
 | key\_protection\_level | The protection level to use when creating a version based on this template. Default value: "SOFTWARE" Possible values: ["SOFTWARE", "HSM"] | `string` | `"SOFTWARE"` | no |
-| key\_rotation\_period | n/a | `string` | `"100000s"` | no |
-| keyring | Keyring name. | `string` | `""` | no |
-| keys | Key names. | `list(string)` | `[]` | no |
+| key\_rotation\_period | specifies the duration, expressed in seconds, for the automatic rotation of cryptographic keys | `string` | `null` | no |
+| keyring | Keyring name. | `string` | n/a | yes |
+| keys | Key names. | `list(string)` | <pre>[<br>  "KMS-KEY"<br>]</pre> | no |
 | label\_order | Label order, e.g. `name`,`application`. | `list(any)` | <pre>[<br>  "name",<br>  "environment"<br>]</pre> | no |
 | location | Location for the keyring. | `string` | `""` | no |
 | module\_enabled | (Optional) Whether or not to create resources within the module. | `bool` | `true` | no |
-| name | (Optional) The name of the VPC. The name will be used to prefix all associacted resources also. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression "[a-z]([-a-z0-9]\*[a-z0-9])?" which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. Default is "main". | `string` | `""` | no |
 | prevent\_destroy | Set the prevent\_destroy lifecycle attribute on keys. | `bool` | `true` | no |
 | project\_id | (Optional) The ID of the project in which the resource belongs. If it is not set, the provider project is used. | `string` | `null` | no |
 | purpose | The immutable purpose of the CryptoKey. Possible values are ENCRYPT\_DECRYPT, ASYMMETRIC\_SIGN, and ASYMMETRIC\_DECRYPT. | `string` | `"ENCRYPT_DECRYPT"` | no |
