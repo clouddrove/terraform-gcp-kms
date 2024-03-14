@@ -1,3 +1,5 @@
+#---------------------------- Label modules variables --------------------------------------
+
 variable "environment" {
   type        = string
   default     = "dev"
@@ -10,17 +12,11 @@ variable "label_order" {
   description = "Label order, e.g. `name`,`application`."
 }
 
+#---------------------------- KMS module variables --------------------------------------
 variable "project_id" {
   type        = string
   default     = null
   description = "(Optional) The ID of the project in which the resource belongs. If it is not set, the provider project is used."
-}
-
-variable "name" {
-  type        = string
-  default     = ""
-  description = "(Optional) The name of the VPC. The name will be used to prefix all associacted resources also. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression \"[a-z]([-a-z0-9]*[a-z0-9])?\" which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. Default is \"main\"."
-
 }
 
 variable "location" {
@@ -29,22 +25,21 @@ variable "location" {
   description = "Location for the keyring."
 }
 
+variable "prevent_destroy" {
+  description = "Set the prevent_destroy lifecycle attribute on keys."
+  type        = bool
+  default     = true
+}
+
 variable "keyring" {
-  type        = string
-  default     = ""
   description = "Keyring name."
+  type        = string
 }
 
 variable "keys" {
   type        = list(string)
-  default     = []
+  default     = ["KMS-KEY"]
   description = "Key names."
-}
-
-variable "prevent_destroy" {
-  type        = bool
-  default     = true
-  description = "Set the prevent_destroy lifecycle attribute on keys."
 }
 
 variable "purpose" {
@@ -65,22 +60,10 @@ variable "module_enabled" {
   description = "(Optional) Whether or not to create resources within the module."
 }
 
-variable "google_kms_key_ring_enabled" {
-  type        = bool
-  default     = true
-  description = "(Optional) Whether or not to create resources within the module."
-}
-
-variable "google_kms_crypto_key_enabled" {
-  type        = bool
-  default     = true
-  description = "(Optional) Whether or not to create resources within the module."
-}
-
 variable "google_kms_crypto_key_iam_binding_enabled" {
   type        = bool
   default     = true
-  description = "(Optional) Whether or not to create resources within the module."
+  description = "(Optional) Whether or not to create IAM bindings for the Google Cloud KMS crypto key within the module. Set to true to include IAM bindings, false to exclude them."
 }
 
 variable "service_accounts" {
@@ -102,6 +85,10 @@ variable "key_protection_level" {
 }
 
 variable "key_rotation_period" {
-  type    = string
-  default = "100000s"
+  type        = string
+  default     = null
+  description = "specifies the duration, expressed in seconds, for the automatic rotation of cryptographic keys"
 }
+
+
+
