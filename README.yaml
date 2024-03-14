@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name : Terraform gcp subnet
+name : Terraform gcp KMS
 
 # License of this project
 license: "APACHE"
@@ -15,18 +15,15 @@ github_repo: clouddrove/terraform-gcp-kms
 
 # Badges to display
 badges:
-  - name: "Terraform"
-    image: "https://img.shields.io/badge/Terraform-v1.1.7-green"
-    url: "https://www.terraform.io"
+  - name: "Latest Release"
+    image: "https://img.shields.io/github/release/clouddrove/terraform-gcp-kms.svg"
+    url: "https://github.com/clouddrove/terraform-gcp-kms/releases/latest"
+  - name: "tfsec"
+    image: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml/badge.svg"
+    url: "https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml"
   - name: "Licence"
     image: "https://img.shields.io/badge/License-APACHE-blue.svg"
     url: "LICENSE.md"
-  - name: "tfsec"
-    image: "https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml/badge.svg"
-    url: "https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml"
-  - name: "static-checks"
-    image: "https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml/badge.svg"
-    url: "https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml"
 
 #  description of this project
 description: |-
