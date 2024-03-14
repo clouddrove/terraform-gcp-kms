@@ -4,7 +4,7 @@
 
 
 <h1 align="center">
-    Terraform gcp subnet
+    Terraform gcp KMS
 </h1>
 
 <p align="center" style="font-size: 1.2rem;"> 
@@ -13,17 +13,14 @@
 
 <p align="center">
 
-<a href="https://www.terraform.io">
-  <img src="https://img.shields.io/badge/Terraform-v1.1.7-green" alt="Terraform">
+<a href="https://github.com/clouddrove/terraform-gcp-kms/releases/latest">
+  <img src="https://img.shields.io/github/release/clouddrove/terraform-gcp-kms.svg" alt="Latest Release">
+</a>
+<a href="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml">
+  <img src="https://github.com/clouddrove/terraform-gcp-kms/actions/workflows/tfsec.yml/badge.svg" alt="tfsec">
 </a>
 <a href="LICENSE.md">
   <img src="https://img.shields.io/badge/License-APACHE-blue.svg" alt="Licence">
-</a>
-<a href="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml">
-  <img src="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/tfsec.yml/badge.svg" alt="tfsec">
-</a>
-<a href="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml">
-  <img src="https://github.com/clouddrove/terraform-gcp-subnet/actions/workflows/terraform.yml/badge.svg" alt="static-checks">
 </a>
 
 
@@ -33,10 +30,10 @@
 <a href='https://facebook.com/sharer/sharer.php?u=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on Facebook" src="https://user-images.githubusercontent.com/50652676/62817743-4f64cb80-bb59-11e9-90c7-b057252ded50.png" />
 </a>
-<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+gcp+subnet&url=https://github.com/clouddrove/terraform-gcp-kms'>
+<a href='https://www.linkedin.com/shareArticle?mini=true&title=Terraform+gcp+KMS&url=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on LinkedIn" src="https://user-images.githubusercontent.com/50652676/62817742-4e339e80-bb59-11e9-87b9-a1f68cae1049.png" />
 </a>
-<a href='https://twitter.com/intent/tweet/?text=Terraform+gcp+subnet&url=https://github.com/clouddrove/terraform-gcp-kms'>
+<a href='https://twitter.com/intent/tweet/?text=Terraform+gcp+KMS&url=https://github.com/clouddrove/terraform-gcp-kms'>
   <img title="Share on Twitter" src="https://user-images.githubusercontent.com/50652676/62817740-4c69db00-bb59-11e9-8a79-3580fbbf6d5c.png" />
 </a>
 
