@@ -5,7 +5,7 @@
 #
 
 # Name of this project
-name : Terraform gcp KMS
+name : Terraform GCP KMS
 
 # License of this project
 license: "APACHE"
@@ -24,13 +24,28 @@ badges:
   - name: "Licence"
     image: "https://img.shields.io/badge/License-APACHE-blue.svg"
     url: "LICENSE.md"
+  - name: "Changelog"
+    image: "https://img.shields.io/badge/Changelog-blue"
+    url: "CHANGELOG.md"
+
+prerequesties:
+  - name: Terraform
+    url: https://learn.hashicorp.com/terraform/getting-started/install.html
+    version: ">= 1.6.6"
+    
+providers:
+  - name: gcp
+    url: https://cloud.google.com/
+    version: ">= 3.50, < 5.0"
+
+module_dependencies:
+  - name: Labels Module
+    url: https://github.com/clouddrove/terraform-gcp-labels
+    description: Provides resource tagging.
 
 #  description of this project
 description: |-
   Terraform module to create KMS resource on google.
-# extra content
-include:
-  - "terraform.md"
 
 # How to use this project
 # How to use this project
