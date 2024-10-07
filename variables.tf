@@ -89,6 +89,3 @@ variable "key_rotation_period" {
   default     = null
   description = "specifies the duration, expressed in seconds, for the automatic rotation of cryptographic keys"
 }
-
-
-

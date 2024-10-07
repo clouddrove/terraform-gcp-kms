@@ -1,5 +1,5 @@
 ##-----------------------------------------------------------------------------
-## Labels module callled that will be used for naming and tags.   
+## Labels module callled that will be used for naming and tags.
 ##-----------------------------------------------------------------------------
 
 module "labels" {
@@ -10,7 +10,7 @@ module "labels" {
   label_order = var.label_order
 }
 
-##----------------------------------------------------------------------------- 
+##-----------------------------------------------------------------------------
 ## resource uses for create key-ring
 ##-----------------------------------------------------------------------------
 
@@ -20,8 +20,8 @@ resource "google_kms_key_ring" "key_ring" {
   location = var.location
 }
 
-##----------------------------------------------------------------------------- 
-## prevent_destroy = true for long lived key not deleting using terraform 
+##-----------------------------------------------------------------------------
+## prevent_destroy = true for long lived key not deleting using terraform
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_crypto_key" "key" {
@@ -42,8 +42,8 @@ resource "google_kms_crypto_key" "key" {
 
 }
 
-##----------------------------------------------------------------------------- 
-## prevent_destroy = false for short lived key deleting using terraform 
+##-----------------------------------------------------------------------------
+## prevent_destroy = false for short lived key deleting using terraform
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_crypto_key" "key_ephemeral" {
@@ -63,8 +63,8 @@ resource "google_kms_crypto_key" "key_ephemeral" {
   }
 }
 
-##----------------------------------------------------------------------------- 
-## resource uses for binding iam role to service-account  
+##-----------------------------------------------------------------------------
+## resource uses for binding iam role to service-account
 ##-----------------------------------------------------------------------------
 
 resource "google_kms_crypto_key_iam_binding" "owners" {
