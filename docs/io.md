@@ -26,4 +26,3 @@
 | keyring | Self link of the keyring. |
 | keyring\_name | Name of the keyring. |
 | keyring\_resource | Keyring resource. |
-
